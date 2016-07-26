@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath 'com.netflix.nebula:gradle-rxjava-project-plugin:4.0.0'
@@ -11,6 +12,7 @@ buildscript {
 description = 'RxJava: Reactive Extensions for the JVM – a library for composing asynchronous and event-based programs using observable sequences for the Java VM.'
 
 apply plugin: 'java'
+apply plugin: 'groovy'
 //apply plugin: 'pmd'
 apply plugin: 'findbugs'
 apply plugin: 'jacoco'
@@ -19,9 +21,16 @@ apply plugin: 'nebula.rxjava-project'
 
 repositories {
     mavenCentral()
+
 }
 
 dependencies {
+
+    compile 'org.codehaus.groovy:groovy-all:2.4.6'
+
+    compile 'org.spockframework:spock-core:1.1-groovy-2.4-rc-1'
+    compile 'org.spockframework:spock-unitils:1.1-groovy-2.4-rc-1'
+
     signature 'org.codehaus.mojo.signature:java16:1.1@signature'
 
     testCompile 'junit:junit:4.12'
