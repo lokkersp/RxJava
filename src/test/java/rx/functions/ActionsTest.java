@@ -117,7 +117,6 @@ public class ActionsTest {
         };
         
         assertNull(Actions.toFunc(action).call(1, 2));
-        assertNull(Actions.toFunc(action).call(1, 2));
         assertEquals(3, value.get());
         value.set(-1L);
         assertEquals((Integer)0, Actions.toFunc(action, 0).call(1, 2));
