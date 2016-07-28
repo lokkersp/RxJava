@@ -1,8 +1,10 @@
 package functions
 
+import rx.TestUtil
 import rx.functions.*
 import spock.lang.Specification
 
+import javax.xml.soap.SAAJMetaFactory
 import java.util.concurrent.atomic.AtomicLong
 
 /**
@@ -74,7 +76,7 @@ class ActionsSpec extends Specification {
         null == f(params.one)
         and: "After calling action AtomicLong has 1"
         1 == value.get()
-        and: "After setting to Atomic -1 and using convert method we take 0"
+        and: "After setting to Atomic -1 and using convert method m(a,r) we take 0"
         0 == Actions.toFunc(a,0).call(1)
         and: "Finally AtomicLong value equals 1"
         1 == value.get()
@@ -83,40 +85,182 @@ class ActionsSpec extends Specification {
         given: "Atomic Long and actions"
         AtomicLong value = new AtomicLong(-1L)
         Action2<Integer,Integer> a = {t1,t2->value.set(t1|t2)}
+        def testSum = params.two.sum()
+        def onParams = params.two
+
+        when: "Action converted to func"
+        def f = Actions.toFunc(a)
+        then: "It's null out after call"
+        null == f(onParams)
+        and: "ActomicLong has ${testSum} after action call"
+        testSum == value.get()
+        and: "After setting to Atomic -1 and using convert method m(a,r) we take 0"
+        value.set(-1L)
+        0 == Actions.toFunc(a,0).call(onParams)
+        and: "Finally we have ${testSum} in AtomicLong"
+        testSum == value.get()
     }
     def "Testing action -> func : 3"() {
         given: "Atomic Long and actions"
         AtomicLong value = new AtomicLong(-1L)
         Action3<Integer,Integer,Integer> a = {t1,t2,t3->value.set(t1|t2|t3)}
+        def testSum = params.three.sum()
+        def onParams = params.three
+
+        when: "Action converted to func"
+        def f = Actions.toFunc(a)
+        then: "It's null out after call"
+        null == f(onParams)
+        and: "ActomicLong has ${testSum} after action call"
+        testSum == value.get()
+        and: "After setting to Atomic -1 and using convert method m(a,r) we take 0"
+        value.set(-1L)
+        0 == Actions.toFunc(a,0).call(onParams)
+        and: "Finally we have ${testSum} in AtomicLong"
+        testSum == value.get()
     }
     def "Testing action -> func : 4"() {
         given: "Atomic Long and actions"
         AtomicLong value = new AtomicLong(-1L)
         Action4<Integer,Integer,Integer,Integer> a = {t1,t2,t3,t4->value.set(t1|t2|t3|t4)}
+        def testSum = params.four.sum()
+        def onParams = params.four
+
+        when: "Action converted to func"
+        def f = Actions.toFunc(a)
+        then: "It's null out after call"
+        null == f(onParams)
+        and: "ActomicLong has ${testSum} after action call"
+        testSum == value.get()
+        and: "After setting to Atomic -1 and using convert method m(a,r) we take 0"
+        value.set(-1L)
+        0 == Actions.toFunc(a,0).call(onParams)
+        and: "Finally we have ${testSum} in AtomicLong"
+        testSum == value.get()
     }
     def "Testing action -> func : 5"() {
         given: "Atomic Long and actions"
         AtomicLong value = new AtomicLong(-1L)
         Action5<Integer,Integer,Integer,Integer,Integer> a = {t1,t2,t3,t4,t5->value.set(t1|t2|t3|t4|t5)}
+        def testSum = params.five.sum()
+        def onParams = params.five
+
+        when: "Action converted to func"
+        def f = Actions.toFunc(a)
+        then: "It's null out after call"
+        null == f(onParams)
+        and: "ActomicLong has ${testSum} after action call"
+        testSum == value.get()
+        and: "After setting to Atomic -1 and using convert method m(a,r) we take 0"
+        value.set(-1L)
+        0 == Actions.toFunc(a,0).call(onParams)
+        and: "Finally we have ${testSum} in AtomicLong"
+        testSum == value.get()
     }
     def "Testing action -> func : 6"() {
         given: "Atomic Long and actions"
         AtomicLong value = new AtomicLong(-1L)
         Action6<Integer,Integer,Integer,Integer,Integer,Integer> a= {t1,t2,t3,t4,t5,t6->value.set(t1|t2|t3|t4|t5|t6)}
+        def testSum = params.six.sum()
+        def onParams = params.six
+
+        when: "Action converted to func"
+        def f = Actions.toFunc(a)
+        then: "It's null out after call"
+        null == f(onParams)
+        and: "ActomicLong has ${testSum} after action call"
+        testSum == value.get()
+        and: "After setting to Atomic -1 and using convert method m(a,r) we take 0"
+        value.set(-1L)
+        0 == Actions.toFunc(a,0).call(onParams)
+        and: "Finally we have ${testSum} in AtomicLong"
+        testSum == value.get()
     }
     def "Testing action -> func : 7"() {
         given: "Atomic Long and actions"
         AtomicLong value = new AtomicLong(-1L)
         Action7<Integer,Integer,Integer,Integer,Integer,Integer,Integer> a= {t1,t2,t3,t4,t5,t6,t7->value.set(t1|t2|t3|t4|t5|t6|t7)}
+        def testSum = params.seven.sum()
+        def onParams = params.seven
+
+        when: "Action converted to func"
+        def f = Actions.toFunc(a)
+        then: "It's null out after call"
+        null == f(onParams)
+        and: "ActomicLong has ${testSum} after action call"
+        testSum == value.get()
+        and: "After setting to Atomic -1 and using convert method m(a,r) we take 0"
+        value.set(-1L)
+        0 == Actions.toFunc(a,0).call(onParams)
+        and: "Finally we have ${testSum} in AtomicLong"
+        testSum == value.get()
     }
     def "Testing action -> func : 8"() {
         given: "Atomic Long and actions"
         AtomicLong value = new AtomicLong(-1L)
         Action8<Integer,Integer,Integer,Integer,Integer,Integer,Integer,Integer> a= {t1,t2,t3,t4,t5,t6,t7,t8->value.set(t1|t2|t3|t4|t5|t6|t7|t8)}
+        def testSum = params.eight.sum()
+        def onParams = params.eight
+
+        when: "Action converted to func"
+        def f = Actions.toFunc(a)
+        then: "It's null out after call"
+        null == f(onParams)
+        and: "ActomicLong has ${testSum} after action call"
+        testSum == value.get()
+        and: "After setting to Atomic -1 and using convert method m(a,r) we take 0"
+        value.set(-1L)
+        0 == Actions.toFunc(a,0).call(onParams)
+        and: "Finally we have ${testSum} in AtomicLong"
+        testSum == value.get()
     }
     def "Testing action -> func : 9"() {
         given: "Atomic Long and actions"
         AtomicLong value = new AtomicLong(-1L)
         Action9<Integer,Integer,Integer,Integer,Integer,Integer,Integer,Integer,Integer> a= {t1,t2,t3,t4,t5,t6,t7,t8,t9->value.set(t1|t2|t3|t4|t5|t6|t7|t8|t9)}
+        def testSum = params.nine.sum()
+        def onParams = params.nine
+
+        when: "Action converted to func"
+        def f = Actions.toFunc(a)
+        then: "It's null out after call"
+        null == f(onParams)
+        and: "ActomicLong has ${testSum} after action call"
+        testSum == value.get()
+        and: "After setting to Atomic -1 and using convert method m(a,r) we take 0"
+        value.set(-1L)
+        0 == Actions.toFunc(a,0).call(onParams)
+        and: "Finally we have ${testSum} in AtomicLong"
+        testSum == value.get()
+    }
+
+    Object[] createAndFillOnes(int i){
+       Object[] res = new Object[i]
+        Arrays.fill(res,1)
+        return res
+    }
+
+    def "Testing action -> func : N(multiple times)"(){
+        expect:
+        final AtomicLong value = new AtomicLong(-1L)
+        def ActionN act = {args->
+            def sum = 0
+            for(o in args) sum +=o
+            value.set(sum)
+        }
+
+        Object[] arr = createAndFillOnes(i)
+        assert null == Actions.toFunc(act).call(arr)
+        assert  i == value.get()
+        value.set(-1L)
+        assert  0 == Actions.toFunc(act,0).call(arr)
+        assert  i == value.get()
+        where:
+        i << (0..99)
+    }
+
+    def "It's should be private"(){
+        expect:
+        TestUtil.checkUtilityClass(Actions.class)
     }
 }
